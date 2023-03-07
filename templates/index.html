@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer</title>
+    <style>
+        form{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: sans-serif;
+            
+        }
+        input{
+            margin: 30px;
+            font-size: 25px;
+        }
+        #submit{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form" >
+        <label for="message">Massage to produce:</label>
+        <input name="message" id="message" type="text" placeholder="Input your message here" autofocus required>
+        <input id="submit" type="submit" value="Send">
+    </form>
+
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector("#form")
+            form.addEventListener('submit',async(event) => {
+                event.preventDefault()
+                const response = await fetch('/produce', {
+                    method: 'POST',
+                    headers: {
+                    'Accept': 'text/plain ',
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({message : document.querySelector('#message').value})
+                });
+                if (response.ok) {
+                    alert('Message sent!');
+                    message.value = '';
+                    } else {
+                    alert('Error, try again');
+                    }
+            });
+        })
+    </script>
+</body>
+</html>

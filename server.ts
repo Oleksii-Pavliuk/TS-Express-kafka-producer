@@ -11,7 +11,7 @@ app.set('views', './templates');
 
 // Initialize kafka client
 const kafka = new Kafka({
-    clientId: 'express-server',
+    clientId: 'express-server-producer',
     brokers: [':9092'],
   })
 const producer = kafka.producer()
